@@ -1,0 +1,67 @@
+:root {
+  --scale: 1;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #BBADA0;
+  padding: 20px 20px;
+  border-radius: 15px;
+  height: calc(320px * var(--scale));
+  width: calc(250px * var(--scale));
+}
+
+.display {
+  flex: 1 0 0;
+  justify-content: flex-end;
+  background-color: lightgray;
+  border-radius: 6px;
+}
+
+.digit {}
+
+.buttons {
+  display: flex;
+  flex: 3 0 0;
+  gap: calc(7px * var(--scale));
+  flex: 1 0 auto;
+}
+
+.col {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: calc(4px * var(--scale));
+}
+
+button {
+  flex: 1;
+  border: none;
+  border-radius: 6px;
+  font-family: "Open Sans";
+  font-size: calc(24px * var(--scale));
+  font-weight: bold;
+  text-align: center;
+}
+
+.num {
+  color: #786E65;
+  background-color: #EEE4DA;
+}
+
+.operation {
+  color: #fff;
+  background-color: #F2B179;
+}
+
+.equals {
+  color: #fff;
+  background-color: #F65D3B;
+}
+
+.plus {
+  flex: 2;
+  padding-top: 7px;
+}
