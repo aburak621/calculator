@@ -9,6 +9,8 @@
   --offset: 2px;
   --segment-color-off: #e7d8bb;
   --segment-color-on: #786E65;
+  --box-shadow-color: #776555;
+  --button-background-color: #EEE4DA;
 }
 
 .calculator {
@@ -20,7 +22,7 @@
   border-radius: 15px;
   height: calc(320px * var(--scale));
   width: calc(250px * var(--scale));
-  box-shadow: 2px 2px 2px #776555;
+  box-shadow: 8px 8px 5px var(--box-shadow-color);
 }
 
 .display {
@@ -30,9 +32,9 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 25px;
-  background-color: #EEE4DA;
+  background-color: var(--button-background-color);
   border-radius: 6px;
-  box-shadow: 2px 2px 2px #776555;
+  box-shadow: 4px 4px 2px var(--box-shadow-color);
 }
 
 .digit {
@@ -62,12 +64,24 @@ button {
   font-size: calc(24px * var(--scale));
   font-weight: bold;
   text-align: center;
-  box-shadow: 2px 2px 2px #776555;
+  box-shadow: 5px 5px 2px var(--box-shadow-color);
+}
+
+button:active {
+  box-shadow: 2px 2px 2px var(--box-shadow-color);
 }
 
 .num {
   color: #786E65;
-  background-color: #EEE4DA;
+  background-color: var(--button-background-color);
+}
+
+.num:hover {
+  background-color: #fff;
+}
+
+.num:active {
+  background-color: #bfb6ac;
 }
 
 .operator,
@@ -77,9 +91,29 @@ button {
   background-color: #F2B179;
 }
 
+.operator:hover,
+.ac:hover,
+.c:hover {
+  background-color: #F57C5F;
+}
+
+.operator:active,
+.ac:active,
+.c:active {
+  background-color: #b6614c;
+}
+
 .equals {
   color: #fff;
   background-color: #F65D3B;
+}
+
+.equals:hover {
+  background-color: red;
+}
+
+.equals:active {
+  background-color: darkred;
 }
 
 .plus {
