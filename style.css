@@ -1,9 +1,9 @@
 :root {
-  --scale: 1.5;
+  --scale: 2;
   --notch-v: 18%;
   --notch-h: 25%;
   --v-width: 10px;
-  --v-height: 25px;
+  --v-height: 35px;
   --h-width: 22px;
   --h-height: 10px;
   --offset: 1.8px;
@@ -25,17 +25,19 @@
 
 .display {
   display: flex;
+  flex-direction: row-reverse;
   flex: 1 0 0;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 30px;
+  padding-right: 25px;
   background-color: #EEE4DA;
   border-radius: 6px;
   box-shadow: 2px 2px 2px #776555;
 }
 
 .digit {
-  margin: 10px 20px 15px 20px;
+  flex-direction: row-reverse;
+  margin: -10px 20px 15px 20px;
 }
 
 .buttons {
