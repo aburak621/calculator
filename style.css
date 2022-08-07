@@ -21,7 +21,7 @@
   padding: 20px 20px;
   border-radius: 15px;
   height: calc(320px * var(--scale));
-  width: calc(250px * var(--scale));
+  width: calc(270px * var(--scale));
   box-shadow: 8px 8px 5px var(--box-shadow-color);
 }
 
@@ -126,6 +126,25 @@ button:active {
   width: 25px;
   height: 60px;
   transform: skewX(-7deg);
+}
+
+.dot {
+  width: var(--h-height);
+  height: var(--h-height);
+  display: inline-block;
+  font-size: 100px;
+  clip-path: polygon(0% 50%,
+      50% 0%,
+      50% 0%,
+      100% 50%,
+      100% 50%,
+      50% 100%,
+      50% 100%,
+      0% 50%);
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--v-width) / -2 + var(--offset) * -2);
+  top: calc(var(--v-height) * 2 + var(--offset) * 4);
 }
 
 .vertical-segment {

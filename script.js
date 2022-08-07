@@ -10,6 +10,7 @@ const digits = calculator.querySelectorAll('.digit');
 
 const keys = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', 'Enter', 'Backspace', 'Delete'];
 const segmentCodes = ['1111110', '0110000', '1101101', '1111001', '0110011', '1011011', '1011111', '1110000', '1111111', '1111011'];
+const overflowCodes = ['0011101', '0111110', '1001111', '0000101', '1000111', '0001110', '0011101', '0101010'].reverse();
 const segmentColorOn = getComputedStyle(document.documentElement).getPropertyValue('--segment-color-on');
 const segmentColorOff = getComputedStyle(document.documentElement).getPropertyValue('--segment-color-off');
 
@@ -18,9 +19,11 @@ let previousValue = '';
 let currentValue = '';
 let currentOperator = '';
 let segments = [];
+let dots = [];
 
 for (let i = 0; i < digits.length; i++) {
-    segments[i] = digits[i].querySelectorAll('div');
+    segments[i] = Array.from(digits[i].querySelectorAll('div')).splice(0, 7);
+    dots = display.querySelectorAll('.dot');
 }
 
 // Main
@@ -105,10 +108,40 @@ function equalsClick(e) {
 
 function printValue() {
     clearDisplay();
+    let dotOffset = 0;
+    let maxDecimalCount = 12 - Math.max(0, displayValue.indexOf('.'));
+    // displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+    if (displayValue.length - (displayValue.includes('.') ? 1 : 0) > 12) {
+        printOverflow();
+        return;
+    }
     const displayDigits = displayValue.split('').reverse();
-    for (let i = displayDigits.length - 1; i >= 0; i--) {
+    if (displayDigits[0] === '.') {
+        displayDigits.unshift('0');
+    }
+    for (let i = 0; i < displayDigits.length; i++) {
+        if (displayDigits[i] === '.') {
+            dots[i - 1].style.backgroundColor = segmentColorOn;
+            dotOffset = 1;
+            continue;
+        }
+        if (displayDigits[i] === '-') {
+            segments[i - dotOffset][6].style.backgroundColor = segmentColorOn;
+        }
         for (let j = 0; j < 7; j++) {
             if (segmentCodes[displayDigits[i]].charAt(j) === '1') {
+                segments[i - dotOffset][j].style.backgroundColor = segmentColorOn;
+            } else {
+                segments[i - dotOffset][j].style.backgroundColor = segmentColorOff;
+            }
+        }
+    }
+}
+
+function printOverflow() {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 7; j++) {
+            if (overflowCodes[i].charAt(j) === '1') {
                 segments[i][j].style.backgroundColor = segmentColorOn;
             } else {
                 segments[i][j].style.backgroundColor = segmentColorOff;
@@ -120,6 +153,9 @@ function printValue() {
 function clearDisplay() {
     segments.forEach((digit) => {
         digit.forEach((segment) => {
+            segment.style.backgroundColor = segmentColorOff;
+        });
+        dots.forEach((segment) => {
             segment.style.backgroundColor = segmentColorOff;
         });
     });
