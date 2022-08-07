@@ -14,16 +14,24 @@ let currentValue = '0';
 let currentOperator = '';
 
 // TODO: 7-segment display
-// TODO: Keyboard support
-// TODO: Prevent double dots
+
+document.onkeydown = (e) => {
+    if (keys.includes(e.key)) {
+        const pressedElement = document.getElementById(e.key);
+        pressedElement.click();
+    }
+};
 
 numbers.forEach((element) => {
     element.addEventListener('click', numberClick);
 });
+
 operators.forEach((element) => {
     element.addEventListener('click', operatorClick);
 });
+
 equals.addEventListener('click', equalsClick);
+
 ac.addEventListener('click', () => {
     displayValue = '0';
     previousValue = '';
@@ -31,6 +39,7 @@ ac.addEventListener('click', () => {
     currentOperator = '';
     printValue();
 });
+
 c.addEventListener('click', () => {
     displayValue = '0';
     currentValue = '';
