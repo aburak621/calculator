@@ -6,9 +6,11 @@ const equals = calculator.querySelector('.equals');
 const ac = calculator.querySelector('.ac');
 const c = calculator.querySelector('.c');
 
+const keys = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', 'Enter', 'Backspace', 'Delete']
+
 let displayValue = '0';
 let previousValue = '';
-let currentValue = '';
+let currentValue = '0';
 let currentOperator = '';
 
 // TODO: 7-segment display
@@ -27,6 +29,7 @@ ac.addEventListener('click', () => {
     previousValue = '';
     currentValue = '';
     currentOperator = '';
+    printValue();
 });
 c.addEventListener('click', () => {
     displayValue = '0';
@@ -38,7 +41,13 @@ function numberClick(e) {
     if (currentValue === '0') {
         currentValue = '';
     }
+    if (currentValue.includes('.') && e.target.textContent === '.') {
+        return;
+    }
     currentValue += e.target.textContent;
+    if (currentValue === '.') {
+        currentValue = '0.';
+    }
     displayValue = currentValue;
     printValue();
 }
