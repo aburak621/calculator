@@ -1,5 +1,14 @@
 :root {
-  --scale: 1;
+  --scale: 1.5;
+  --notch-v: 18%;
+  --notch-h: 25%;
+  --v-width: 10px;
+  --v-height: 25px;
+  --h-width: 22px;
+  --h-height: 10px;
+  --offset: 1.8px;
+  --segment-color-off: #e7d8bb;
+  --segment-color-on: #786E65;
 }
 
 .calculator {
@@ -15,14 +24,19 @@
 }
 
 .display {
+  display: flex;
   flex: 1 0 0;
   justify-content: flex-end;
-  background-color: lightgray;
+  align-items: center;
+  padding-right: 30px;
+  background-color: #EEE4DA;
   border-radius: 6px;
   box-shadow: 2px 2px 2px #776555;
 }
 
-.digit {}
+.digit {
+  margin: 10px 20px 15px 20px;
+}
 
 .buttons {
   display: flex;
@@ -69,4 +83,87 @@ button {
 .plus {
   flex: 2;
   padding-top: 7px;
+}
+
+.digit {
+  position: relative;
+  width: 25px;
+  height: 60px;
+  transform: skewX(-7deg);
+}
+
+.vertical-segment {
+  width: var(--v-width);
+  height: var(--v-height);
+  display: inline-block;
+  font-size: 100px;
+  clip-path: polygon(0% calc(var(--notch-v)),
+      50% 0%,
+      50% 0%,
+      100% calc(var(--notch-v)),
+      100% calc(100% - var(--notch-v)),
+      50% 100%,
+      50% 100%,
+      0% calc(100% - var(--notch-v)));
+}
+
+.horizontal-segment {
+  width: var(--h-width);
+  height: var(--h-height);
+  display: inline-block;
+  font-size: 100px;
+  clip-path: polygon(0% 50%,
+      calc(var(--notch-h)) 0%,
+      calc(100% - var(--notch-h)) 0%,
+      100% 50%,
+      100% 50%,
+      calc(100% - var(--notch-h)) 100%,
+      calc(var(--notch-h)) 100%,
+      0% 50%);
+}
+
+.segment-one {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--v-width) / 2 + var(--offset));
+}
+
+.segment-two {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--h-width) + var(--offset) * 2);
+  top: calc(var(--h-height) / 2 + var(--offset));
+}
+
+.segment-three {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--h-width) + var(--offset) * 2);
+  top: calc(var(--v-height) + var(--h-height) / 2 + var(--offset) * 3);
+}
+
+.segment-four {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--v-width) / 2 + var(--offset));
+  top: calc(var(--v-height) * 2 + var(--offset) * 4);
+}
+
+.segment-five {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  top: calc(var(--v-height) + var(--h-height) / 2 + var(--offset) * 3);
+}
+
+.segment-six {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  top: calc(var(--h-height) / 2 + var(--offset));
+}
+
+.segment-seven {
+  background-color: var(--segment-color-off);
+  position: absolute;
+  left: calc(var(--v-width) / 2 + var(--offset));
+  top: calc(var(--v-height) + var(--offset) * 2);
 }
