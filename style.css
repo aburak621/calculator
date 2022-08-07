@@ -54,7 +54,9 @@ button {
   background-color: #EEE4DA;
 }
 
-.operator {
+.operator,
+.ac,
+.c {
   color: #fff;
   background-color: #F2B179;
 }
