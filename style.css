@@ -1,12 +1,12 @@
 :root {
   --scale: 2;
   --notch-v: 18%;
-  --notch-h: 25%;
+  --notch-h: 20%;
   --v-width: 10px;
   --v-height: 35px;
   --h-width: 22px;
   --h-height: 10px;
-  --offset: 1.8px;
+  --offset: 2px;
   --segment-color-off: #e7d8bb;
   --segment-color-on: #786E65;
 }

@@ -15,14 +15,24 @@ const segmentColorOff = getComputedStyle(document.documentElement).getPropertyVa
 
 let displayValue = '0';
 let previousValue = '';
-let currentValue = '0';
+let currentValue = '';
 let currentOperator = '';
 let segments = [];
 
 for (let i = 0; i < digits.length; i++) {
     segments[i] = digits[i].querySelectorAll('div');
 }
+
+// Main
 printValue();
+
+// Events
+onkeydown = (e) => {
+    // Prevent enter from pressing the last clicked button with mouse.
+    if (e.key === 'Enter') {
+        e.preventDefault();
+    }
+}
 
 document.onkeydown = (e) => {
     if (keys.includes(e.key)) {
@@ -44,7 +54,7 @@ equals.addEventListener('click', equalsClick);
 ac.addEventListener('click', () => {
     displayValue = '0';
     previousValue = '';
-    currentValue = '';
+    currentValue = '0';
     currentOperator = '';
     printValue();
 });
@@ -55,6 +65,7 @@ c.addEventListener('click', () => {
     printValue();
 });
 
+// Functions
 function numberClick(e) {
     if (currentValue === '0') {
         currentValue = '';
