@@ -81,7 +81,7 @@ function numberClick(e) {
         currentValue = '0.';
     }
     displayValue = currentValue;
-    printValue();
+    printValue(shouldRound = false);
 }
 
 function operatorClick(e) {
@@ -106,11 +106,13 @@ function equalsClick(e) {
     printValue();
 }
 
-function printValue() {
+function printValue(shouldRound = true) {
     clearDisplay();
     let dotOffset = 0;
     let maxDecimalCount = 12 - Math.max(0, displayValue.indexOf('.'));
-    // displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+    if (shouldRound) {
+        displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+    }
     if (displayValue.length - (displayValue.includes('.') ? 1 : 0) > 12) {
         printOverflow();
         return;
