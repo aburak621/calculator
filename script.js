@@ -11,6 +11,7 @@ const digits = calculator.querySelectorAll('.digit');
 const keys = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', 'Enter', 'Backspace', 'Delete'];
 const segmentCodes = ['1111110', '0110000', '1101101', '1111001', '0110011', '1011011', '1011111', '1110000', '1111111', '1111011'];
 const overflowCodes = ['0011101', '0111110', '1001111', '0000101', '1000111', '0001110', '0011101', '0101010'].reverse();
+const bruhCodes = ['0011111', '0000101', '0011100', '0010111'].reverse();
 const segmentColorOn = getComputedStyle(document.documentElement).getPropertyValue('--segment-color-on');
 const segmentColorOff = getComputedStyle(document.documentElement).getPropertyValue('--segment-color-off');
 
@@ -37,7 +38,7 @@ onkeydown = (e) => {
     }
 }
 
-document.onkeydown = (e) => {
+onkeydown = (e) => {
     if (keys.includes(e.key)) {
         const pressedElement = document.getElementById(e.key);
         pressedElement.click();
@@ -110,13 +111,19 @@ function printValue(shouldRound = true) {
     clearDisplay();
     let dotOffset = 0;
     let maxDecimalCount = 12 - Math.max(0, displayValue.indexOf('.'));
-    if (shouldRound) {
-        displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+
+    if (displayValue === 'BRUH') {
+        printBruh();
+        return;
     }
     if (displayValue.length - (displayValue.includes('.') ? 1 : 0) > 12) {
         printOverflow();
         return;
     }
+    if (shouldRound) {
+        displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+    }
+
     const displayDigits = displayValue.split('').reverse();
     if (displayDigits[0] === '.') {
         displayDigits.unshift('0');
@@ -144,6 +151,18 @@ function printOverflow() {
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 7; j++) {
             if (overflowCodes[i].charAt(j) === '1') {
+                segments[i][j].style.backgroundColor = segmentColorOn;
+            } else {
+                segments[i][j].style.backgroundColor = segmentColorOff;
+            }
+        }
+    }
+}
+
+function printBruh() {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 7; j++) {
+            if (bruhCodes[i].charAt(j) === '1') {
                 segments[i][j].style.backgroundColor = segmentColorOn;
             } else {
                 segments[i][j].style.backgroundColor = segmentColorOff;
