@@ -13,12 +13,21 @@
   --button-background-color: #EEE4DA;
 }
 
+body {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 75vh;
   min-height: 680px;
+  padding-bottom: 55px;
 }
 
 .calculator {
