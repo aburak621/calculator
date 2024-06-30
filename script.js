@@ -58,7 +58,7 @@ equals.addEventListener('click', equalsClick);
 ac.addEventListener('click', () => {
     displayValue = '0';
     previousValue = '';
-    currentValue = '0';
+    currentValue = '';
     currentOperator = '';
     printValue();
 });
@@ -116,12 +116,12 @@ function printValue(shouldRound = true) {
         printBruh();
         return;
     }
+    if (shouldRound) {
+        displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
+    }
     if (displayValue.length - (displayValue.includes('.') ? 1 : 0) > 12) {
         printOverflow();
         return;
-    }
-    if (shouldRound) {
-        displayValue = (Math.round(Number(displayValue) * Number('1' + ('0'.repeat(maxDecimalCount)))) / Number('1' + ('0'.repeat(maxDecimalCount)))).toString();
     }
 
     const displayDigits = displayValue.split('').reverse();
